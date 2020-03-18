@@ -231,8 +231,17 @@ form {
   background: red;
   color: white;
 }
-.btn.btn--no-action{
-  display: none;
+.btn:disabled{
+  background-color: #fff;
+  color:#ccc;
+  border: 1px solid #ccc;
+}
+.btn:disabled:hover,
+.btn:disabled:active
+{
+  background-color: #fff;
+  color:#ccc;
+  border: 1px solid #ccc;
 }
 .user-message{
   margin: auto;

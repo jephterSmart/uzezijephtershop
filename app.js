@@ -17,7 +17,7 @@ const UserModel = require('./models/user');
 const app = express();
 
 const store = new MongodbStore({
-    uri:process.env.MONGO_URI,
+    uri:process.env.MONGO_URI_CONNECT,
     collection: 'sessions'
 })
 const csrfProtection = csrf();
@@ -107,10 +107,9 @@ mongoose.connect(process.env.MONGO_URI,
 {useNewUrlParser: true})
 .then(result => {
    
- app.listen(processs.env.PORT || 3000)
+ app.listen(process.env.PORT || 3000)
     })
 .catch(err =>{
-    const error = new Error(err);
-    next(error);
+    throw err
     
 })

@@ -26,7 +26,11 @@
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <input type="hidden" value="<%= p.productId._id %>" name="productId">
                                 <input type="hidden" value="true" name="Decrease">
-                                <button class="<%= (p.quantity <= 1) ? 'btn btn--no-action': 'btn ' %>" type="submit">Decrease Quantity</button>
+                                <% if(p.quantity <= 1) {%> 
+                                <button type="submit" class="btn" disabled >Decrease Quantity</button>
+                                <% } else { %>
+                                    <button type="submit" class="btn"  >Decrease Quantity</button>
+                                    <% } %>
                             </form>
                         </li>
                     <% }) %>

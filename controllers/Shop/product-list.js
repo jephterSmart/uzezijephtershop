@@ -92,26 +92,26 @@ exports.getCheckout = (req,res,next) =>{
         productArray.forEach(prod =>{
             total += prod.productId.price * prod.quantity;
         })
-        return stripe.paymentIntents.create({
-            amount: +total.toFixed(0),
-            currency: 'usd',
-            // Verify your integration in this guide by including this parameter
-            metadata: {integration_check: 'accept_a_payment'},
-        })
-        // return stripe.checkout.sessions.create({
-        //     payment_method_types: ['card'],
-        //     line_items: productArray.map(p => {
-        //         return {
-        //             name: p.productId.title,
-        //             description: p.productId.description,
-        //             currency:'usd',
-        //             amount : p.productId.price * 100,
-        //             quantity: p.quantity,
-        //         }
-        //     }),
-        //     success_url : req.protocol + '://' + req.get('host') + '/checkout/success',
-        //     cancel_url: req.protocol + '://' + req.get('host') + '/checkout/cancel'
+        // return stripe.paymentIntents.create({
+        //     amount: +total.toFixed(0),
+        //     currency: 'usd',
+        //     // Verify your integration in this guide by including this parameter
+        //     metadata: {integration_check: 'accept_a_payment'},
         // })
+        return stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: productArray.map(p => {
+                return {
+                    name: p.productId.title,
+                    description: p.productId.description,
+                    currency:'usd',
+                    amount : p.productId.price * 100,
+                    quantity: p.quantity,
+                }
+            }),
+            success_url : req.protocol + '://' + req.get('host') + '/checkout/success',
+            cancel_url: req.protocol + '://' + req.get('host') + '/checkout/cancel'
+        })
         
     
     })
@@ -122,7 +122,7 @@ exports.getCheckout = (req,res,next) =>{
             pageTitle: 'Your Cart',
             products:productArray ,
             totalSum: total,
-            sessionId: paymentIntent.client_secret
+            sessionId: paymentIntent.id
         })
     })
     .catch(err => console.log(err));

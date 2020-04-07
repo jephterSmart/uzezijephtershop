@@ -1,8 +1,0 @@
-{
-    "env":{
-        "MONGO_URI":"mongodb+srv://jeff:mobile165@cluster0-l1zxn.mongodb.net/shop?retryWrites=true&w=majority",
-        "STRIPE_KEY":"sk_test_EpbPXK70y5QqMgariXI7iji900K7PwN3XP",
-        "MAILGUN_KEY": "4527404c991071a646beccf2afe9d568-c322068c-69136d7e",
-        "MONGO_URI_CONNECT":"mongodb+srv://jeff:mobile165@cluster0-l1zxn.mongodb.net/shop"
-    }
-}
